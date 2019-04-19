@@ -23,7 +23,7 @@ export function readPost(id) {
 export function deletePost(id) {
   return function(dispatch) {
     axios.delete(`${END_POINT}/posts/${id}`).then(response => {
-      dispatch({ type: AT_POSTS.DELETE, payload: response.data });
+      dispatch({ type: AT_POSTS.DELETE, payload: id });
     });
   };
 }
