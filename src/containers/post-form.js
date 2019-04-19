@@ -10,7 +10,8 @@ import { createPost } from "../actions/index";
 const formConfig = {
   form: "createPostForm",
   fields: ["title", "content", "author"],
-  validate: validate
+  validate: validate,
+  initialValues: { author: "Moi" }
 };
 
 class PostForm extends Component {
@@ -24,6 +25,7 @@ class PostForm extends Component {
     return (
       <div>
         <h1>Nouveau Post</h1>
+
         <form onSubmit={handleSubmit(this.createPost.bind(this))}>
           <div
             className={`form-group ${
