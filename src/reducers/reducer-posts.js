@@ -12,6 +12,8 @@ export default function reducerPosts(state = [], action) {
           return true;
         }
       });
+    case AT_POSTS.CREATE:
+      return [...state, action.payload];
     default:
       return state;
   }

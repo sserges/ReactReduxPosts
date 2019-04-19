@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { reduxForm } from "redux-form";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { browserHistory } from "react-router";
 
 import { createPost } from "../actions/index";
 
@@ -13,12 +14,12 @@ const formConfig = {
 
 class PostForm extends Component {
   render() {
-    const { fields } = this.props;
+    const { fields, handleSubmit } = this.props;
     console.log(fields);
     return (
       <div>
         <h1>Nouveau Post</h1>
-        <form>
+        <form onSubmit={handleSubmit(this.createPost.bind(this))}>
           <div className="form-group">
             <label>Titre</label>
             <input className="form-control" type="text" {...fields.title} />
@@ -44,9 +45,18 @@ class PostForm extends Component {
       </div>
     );
   }
+
+  createPost(post) {
+    this.props.createPost(post);
+    browserHistory.push("/");
+  }
 }
+
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators({ createPost }, dispatch)
+});
 
 export default connect(
   null,
-  null
+  mapDispatchToProps
 )(reduxForm(formConfig)(PostForm));
