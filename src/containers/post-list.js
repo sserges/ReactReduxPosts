@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import ReactCSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 
 import { readAllPost, deletePost } from "../actions/index";
 import PostListItem from "../components/post-list-item";
@@ -44,7 +45,14 @@ class PostList extends Component {
             </tr>
           </thead>
 
-          <tbody>{this.renderPosts()}</tbody>
+          <ReactCSSTransitionGroup
+            component="tbody"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            transitionName="fade"
+          >
+            {this.renderPosts()}
+          </ReactCSSTransitionGroup>
         </table>
       </div>
     );
